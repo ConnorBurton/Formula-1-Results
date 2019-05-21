@@ -4,8 +4,7 @@
       <option v-for="year in years" :value="year">{{year}}</option>
     </select>
 
-    <select class="select-race" name="" v-model="selectedRace" @change="onChangeRace($event)">
-      <option >Select Race</option>
+    <select id="raceSelect" name="" v-model="selectedRace" @change="onChangeRace($event)">
       <option v-for="race in raceList" :value="race.round">{{ race.raceName }}</option>
     </select>
   </div>
@@ -44,4 +43,21 @@ export default {
 </script>
 
 
-<style scoped></style>
+<style scoped>
+  #select-race {
+    text-align: center;
+    padding: 40px 0 50px;
+  }
+  select {
+    appearance: none;
+    margin: 0 20px;
+    color: #fff;
+    border: 0px;
+    border-bottom: 1px solid #fff;
+    padding: 15px 50px;
+    background-color: #212121;
+    border-radius: 0;
+    outline: none;
+    text-align-last: center;
+  }
+</style>

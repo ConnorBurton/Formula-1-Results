@@ -12,18 +12,21 @@
           <th>Points</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="currentRace !== ''">
         <tr v-for="detail in currentRace" >
-          <td>{{detail.position}}</td>
-          <td>{{detail.number}}</td>
-          <td>{{detail.Driver.familyName}}</td>
-          <td>{{detail.Constructor.name}}</td>
-          <td>{{detail.laps}}</td>
-          <td v-if="detail.Time !== undefined">{{detail.Time.time}}</td>
-          <td v-else>{{detail.status}}</td>
-          <td>{{detail.points}}</td>
+          <td class="position">{{detail.position}}</td>
+          <td class="number">{{detail.number}}</td>
+          <td class="name">{{detail.Driver.familyName}}</td>
+          <td class="constructor">{{detail.Constructor.name}}</td>
+          <td class="laps">{{detail.laps}}</td>
+          <td v-if="detail.Time !== undefined" class="time">{{detail.Time.time}}</td>
+          <td v-else class="time">{{detail.status}}</td>
+          <td class="points">{{detail.points}}</td>
         </tr>
       </tbody>
+      <div v-else>
+        No Results
+      </div>
     </table>
   </div>
 
@@ -41,13 +44,27 @@
 <style scoped>
   table {
     width: 100%;
+    border-spacing: 0;
+    border: 0px;
   }
   thead {
-    background: #eee;
+
+  }
+  tr {
+    border-bottom: 1px solid #444;
   }
   td,th {
-    border: 1px solid black;
-    padding: 10px;
-    border-collapse: collapse;
+    padding: 35px 15px;
+    color: #fff;
+    text-align: center;
+    font-weight: 100;
+    letter-spacing: 0.5px;
+  }
+  th {
+    font-weight: 600;
+    padding: 25px 15px;
+  }
+  .position, .number {
+    width: 115px;
   }
 </style>
