@@ -31,26 +31,33 @@ export default {
   },
   methods: {
     getUpdatedRaceResults: function() {
-      axios
-        .get('http://ergast.com/api/f1/'+ this.selectedYear +'/'+ this.selectedRace +'/results.json')
-        .then(response => (this.currentRace = response.data.MRData.RaceTable.Races[0].Results))
+      Promise.all([axios.get('http://ergast.com/api/f1/'+ this.selectedYear +'/'+ this.selectedRace +'/results.json')])
+        .then(response => {
+          this.currentRace = []
+          this.currentRace = response[0].data.MRData.RaceTable.Races[0].Results
+      })
     },
 
     getUpdatedListResults: function() {
-      axios
-        .get('http://ergast.com/api/f1/'+ this.selectedYear +'.json')
-        .then(response => (this.raceList = response.data.MRData.RaceTable.Races))
+
+      Promise.all([axios.get('http://ergast.com/api/f1/'+ this.selectedYear +'.json')])
+        .then(response => {
+          this.currentRace = []
+          this.raceList = response[0].data.MRData.RaceTable.Races
+      })
+
+      // axios
+      //   .get('http://ergast.com/api/f1/'+ this.selectedYear +'.json')
+      //   .then(response => (this.raceList = response.data.MRData.RaceTable.Races))
     },
 
     updateYearValue(val) {
-      this.currentRace = '';
       this.selectedYear = val;
       this.getUpdatedListResults()
       this.getUpdatedRaceResults()
     },
 
     updateRaceValue(val) {
-      this.currentRace = '';
       this.selectedRace = val;
       this.getUpdatedRaceResults()
     }
@@ -58,6 +65,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  #app {
+    max-width: 1200px;
+    display: block;
+    margin: auto;
+  }
 </style>
