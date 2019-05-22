@@ -45,6 +45,10 @@ table {
   font-size: 18px;
 }
 
-body {
+body,html {
+  min-height: 100%;
   background-color: #212121;
+}
+body {
+  padding-bottom: 60px;
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <select-race :raceList="raceList" @selectedRaceValue="updateRaceValue" @selectedYearValue="updateYearValue" />
-    <current-list :currentRace="currentRace" />
+    <current-list :currentRace="currentRace" :spinnerStyle="spinnerStyle" />
   </div>
 </template>
 
@@ -23,6 +23,7 @@ export default {
       raceList: null,
       selectedRace: 1,
       selectedYear: 2019,
+      spinnerStyle: false,
     }
   },
   mounted() {
@@ -30,25 +31,23 @@ export default {
     this.getUpdatedListResults()
   },
   methods: {
-    getUpdatedRaceResults: function() {
+    async getUpdatedRaceResults() {
+      this.spinnerStyle = true;
       Promise.all([axios.get('http://ergast.com/api/f1/'+ this.selectedYear +'/'+ this.selectedRace +'/results.json')])
         .then(response => {
           this.currentRace = []
-          this.currentRace = response[0].data.MRData.RaceTable.Races[0].Results
-      })
+          if(response[0].data.MRData.RaceTable.Races[0] !== undefined)
+            this.currentRace = response[0].data.MRData.RaceTable.Races[0].Results
+          setTimeout( () => this.spinnerStyle = false, 2000)
+        })
     },
 
-    getUpdatedListResults: function() {
-
+    async getUpdatedListResults() {
       Promise.all([axios.get('http://ergast.com/api/f1/'+ this.selectedYear +'.json')])
         .then(response => {
           this.currentRace = []
           this.raceList = response[0].data.MRData.RaceTable.Races
       })
-
-      // axios
-      //   .get('http://ergast.com/api/f1/'+ this.selectedYear +'.json')
-      //   .then(response => (this.raceList = response.data.MRData.RaceTable.Races))
     },
 
     updateYearValue(val) {
