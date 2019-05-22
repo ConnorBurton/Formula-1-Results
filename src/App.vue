@@ -33,7 +33,7 @@ export default {
   methods: {
     async getUpdatedRaceResults() {
       this.spinnerStyle = true;
-      Promise.all([axios.get('http://ergast.com/api/f1/'+ this.selectedYear +'/'+ this.selectedRace +'/results.json')])
+      Promise.all([axios.get('https://ergast.com/api/f1/'+ this.selectedYear +'/'+ this.selectedRace +'/results.json')])
         .then(response => {
           this.currentRace = []
           if(response[0].data.MRData.RaceTable.Races[0] !== undefined)
@@ -43,7 +43,7 @@ export default {
     },
 
     async getUpdatedListResults() {
-      Promise.all([axios.get('http://ergast.com/api/f1/'+ this.selectedYear +'.json')])
+      Promise.all([axios.get('https://ergast.com/api/f1/'+ this.selectedYear +'.json')])
         .then(response => {
           this.currentRace = []
           this.raceList = response[0].data.MRData.RaceTable.Races
