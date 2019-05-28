@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     async getLatestRace() {
-      Promise.all([axios.get('http://ergast.com/api/f1/current/last.json')])
+      Promise.all([axios.get('https://ergast.com/api/f1/current/last.json')])
         .then(response => {
           this.latestRace = response[0].data.MRData.RaceTable.round
           this.selectedRace = response[0].data.MRData.RaceTable.round
