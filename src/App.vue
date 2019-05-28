@@ -65,7 +65,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   #app {
     max-width: 1200px;
     display: block;

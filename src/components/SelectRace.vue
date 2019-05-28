@@ -56,21 +56,21 @@ export default {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
   #select-race {
     text-align: center;
     padding: 40px 0 50px;
-  }
-  select {
-    appearance: none;
-    margin: 0 20px;
-    color: #fff;
-    border: 0px;
-    border-bottom: 1px solid #fff;
-    padding: 15px 50px;
-    background-color: #212121;
-    border-radius: 0;
-    outline: none;
-    text-align-last: center;
+    select {
+      appearance: none;
+      margin: 0 20px;
+      color: #fff;
+      border: 0px;
+      border-bottom: 1px solid #fff;
+      padding: 15px 50px;
+      background-color: #212121;
+      border-radius: 0;
+      outline: none;
+      text-align-last: center;
+    }
   }
 </style>
