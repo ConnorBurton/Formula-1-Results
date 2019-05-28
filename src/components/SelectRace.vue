@@ -11,11 +11,14 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'select-race',
   data() {
     return {
-      selectedRace: 1,
+      selectedRace: null,
+      latestRace: null,
       selectedYear: '',
     }
   },
@@ -23,17 +26,27 @@ export default {
     raceList: Array
   },
   beforeMount() {
+    this.getLatestRace()
     this.selectedYear = new Date().getFullYear()
   },
   methods: {
+    async getLatestRace() {
+      Promise.all([axios.get('http://ergast.com/api/f1/current/last.json')])
+        .then(response => {
+          this.latestRace = response[0].data.MRData.RaceTable.round
+          this.selectedRace = response[0].data.MRData.RaceTable.round
+        })
+    },
+
     onChangeYear(event) {
       this.$emit('selectedYearValue', event.target.value)
+      this.selectedRace = 1
     },
     onChangeRace(event) {
       this.$emit('selectedRaceValue', event.target.value)
     }
   },
-  computed : {
+  computed: {
     years() {
       const year = new Date().getFullYear()
       return Array.from({length: year - 1949}, (value, index) => 1950 + index)
@@ -43,21 +56,21 @@ export default {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
   #select-race {
     text-align: center;
     padding: 40px 0 50px;
-  }
-  select {
-    appearance: none;
-    margin: 0 20px;
-    color: #fff;
-    border: 0px;
-    border-bottom: 1px solid #fff;
-    padding: 15px 50px;
-    background-color: #212121;
-    border-radius: 0;
-    outline: none;
-    text-align-last: center;
+    select {
+      appearance: none;
+      margin: 0 20px;
+      color: #fff;
+      border: 0px;
+      border-bottom: 1px solid #fff;
+      padding: 15px 50px;
+      background-color: #212121;
+      border-radius: 0;
+      outline: none;
+      text-align-last: center;
+    }
   }
 </style>

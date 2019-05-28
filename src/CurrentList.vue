@@ -47,58 +47,58 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   #current-table {
     position: relative;
+  }
+
+  .results-wrapper {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    transition: .75s ease;
+    &.hidden {
+      transform: translateY(60px);
+      opacity: 0;
+      visibility: hidden;
+      transition: .3s ease;
+    }
   }
 
   table {
     width: 100%;
     border-spacing: 0;
     border: 0px;
+    tr {
+      border-bottom: 1px solid #444;
+      td,th {
+        padding: 35px 15px;
+        color: #fff;
+        text-align: center;
+        font-weight: 100;
+        letter-spacing: 0.5px;
+        &.position, &.number {
+          width: 115px;
+        }
+      }
+      th {
+        font-weight: 600;
+        padding: 25px 15px;
+      }
+    }
   }
-  thead {
 
-  }
-  tr {
-    border-bottom: 1px solid #444;
-  }
-  td,th {
-    padding: 35px 15px;
-    color: #fff;
-    text-align: center;
-    font-weight: 100;
-    letter-spacing: 0.5px;
-  }
-  th {
-    font-weight: 600;
-    padding: 25px 15px;
-  }
-  .position, .number {
-    width: 115px;
-  }
   .no-results {
     display: block;
     text-align: center;
     padding-top: 40px;
+    p {
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+    }
   }
-  .no-results p {
-    color: #fff;
-    font-size: 24px;
-    font-weight: 700;
-  }
-  .results-wrapper {
-    transform: none;
-    opacity: 1;
-    visibility: visible;
-    transition: .75s ease;
-  }
-  .results-wrapper.hidden {
-    transform: translateY(60px);
-    opacity: 0;
-    visibility: hidden;
-    transition: .3s ease;
-  }
+
   .spinner {
     position: absolute;
     top: 40px;
@@ -113,9 +113,9 @@
     opacity: 0;
     visibility: hidden;
     transition: .3s ease;
-  }
-  .spinner.visible {
-    opacity: 1;
-    visibility: visible;
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 </style>

@@ -52,6 +52,7 @@ export default {
 
     updateYearValue(val) {
       this.selectedYear = val;
+      this.selectedRace = 1
       this.getUpdatedListResults()
       this.getUpdatedRaceResults()
     },
@@ -64,7 +65,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   #app {
     max-width: 1200px;
     display: block;
