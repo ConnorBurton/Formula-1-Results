@@ -11,11 +11,14 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'select-race',
   data() {
     return {
-      selectedRace: 1,
+      selectedRace: null,
+      latestRace: null,
       selectedYear: '',
     }
   },
@@ -23,17 +26,27 @@ export default {
     raceList: Array
   },
   beforeMount() {
+    this.getLatestRace()
     this.selectedYear = new Date().getFullYear()
   },
   methods: {
+    async getLatestRace() {
+      Promise.all([axios.get('http://ergast.com/api/f1/current/last.json')])
+        .then(response => {
+          this.latestRace = response[0].data.MRData.RaceTable.round
+          this.selectedRace = response[0].data.MRData.RaceTable.round
+        })
+    },
+
     onChangeYear(event) {
       this.$emit('selectedYearValue', event.target.value)
+      this.selectedRace = 1
     },
     onChangeRace(event) {
       this.$emit('selectedRaceValue', event.target.value)
     }
   },
-  computed : {
+  computed: {
     years() {
       const year = new Date().getFullYear()
       return Array.from({length: year - 1949}, (value, index) => 1950 + index)

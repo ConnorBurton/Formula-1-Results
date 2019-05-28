@@ -52,6 +52,7 @@ export default {
 
     updateYearValue(val) {
       this.selectedYear = val;
+      this.selectedRace = 1
       this.getUpdatedListResults()
       this.getUpdatedRaceResults()
     },
