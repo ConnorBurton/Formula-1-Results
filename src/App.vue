@@ -51,14 +51,14 @@ export default {
     },
 
     updateYearValue(val) {
-      this.selectedYear = val;
+      this.selectedYear = val
       this.selectedRace = 1
       this.getUpdatedListResults()
       this.getUpdatedRaceResults()
     },
 
     updateRaceValue(val) {
-      this.selectedRace = val;
+      this.selectedRace = val
       this.getUpdatedRaceResults()
     }
   }
